@@ -1,0 +1,13 @@
+<p>students-page!</p>
+
+<ul>
+    <li
+    [style.color]="student.aprobado ? 'green' : 'red'"
+      *ngFor="let student of students"
+    >
+    {{ student.name | uppercaseApproved: student.aprobado}} -
+    <button (click)="student.alternarAprobado()" type="button">
+        {{ student.aprobado ? "Desaprobar" : "Aprobar" }}
+    </button>
+    </li>
+</ul>
