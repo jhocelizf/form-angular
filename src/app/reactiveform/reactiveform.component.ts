@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { validatePassword } from '../utils/validator';
 
 @Component({
   selector: 'app-reactiveform',
@@ -19,11 +20,11 @@ studentForm = this.fb.group({
     email: this.fb.control('',
       [Validators.required, 
       Validators.email]),
-    password: ['', Validators.required],
-    name: this.fb.control(''),
-    lastName: this.fb.control(''),
-    address: this.fb.control(''),
-    
+    password: ['', [Validators.required, Validators.minLength(8), validatePassword]],
+    name: this.fb.control('', Validators.required),
+    lastName: this.fb.control('', Validators.required),
+    address: this.fb.control('', Validators.required),
+    city: this.fb.control('', Validators.required),
   }); 
 
   get emailControl() {
@@ -34,17 +35,42 @@ studentForm = this.fb.group({
     return this.studentForm.get('password');
   }
 
+  get nameControl() {
+    return this.studentForm.get('name');
+  }
+
+  get lastnameControl() {
+    return this.studentForm.get('lastName');
+  }
+
+  get addressControl() {
+    return this.studentForm.get('address');
+  }
+
+  get cityControl() {
+    return this.studentForm.get('city');
+  }
+
+
+
+  
+
 onSubmit(): void {
-    //alert('Usuario creado' + JSON.stringify(this.studentForm.value));
-Swal.fire({
+if(this.studentForm.valid){
+  Swal.fire({
       icon: 'success',
       title: 'Realizado',
       text: 'Usuario registrado', 
     });
-  }
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Por favor, completa el formulario correctamente.',
+});
 }
 
-
+}}
   
   // SIN FORM BUILDER
 //     studentForm = new FormGroup({
@@ -55,3 +81,5 @@ Swal.fire({
 //     address: new FormGroup(''),
   
 // })
+
+

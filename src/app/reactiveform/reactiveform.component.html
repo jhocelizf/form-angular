@@ -21,35 +21,48 @@
     [class.is-valid]="passwordControl?.valid"
     [class.is-invalid]="passwordControl?.touched && passwordControl?.invalid"
     id="inputPassword4"
+    placeholder="Ejemplo: Mg555987!"
     />
+    <div *ngIf="passwordControl?.hasError('strongPassword') && passwordControl?.touched">
+    </div>
+    <p class="form-text">La contraseña debe tener al menos 8 caracteres, una mayuscula, una minuscula y
+    un numero.</p>
   </div>
   <div class="col-md-6">
     <label class="form-label">Name</label>
-    <input type="text" class="form-control" />
+    <input 
+    formControlName="name"
+    type="text" 
+    [ngClass]="nameControl?.valid ? 'is-valid' : ''"
+    class="form-control" />
   </div>
   <div class="col-md-6">
     <label class="form-label">Last name</label>
-    <input type="text" class="form-control" />
+    <input
+      formControlName="lastName"
+      type="text"
+      [ngClass]="lastnameControl?.valid ? 'is-valid' : ''"
+      class="form-control" />
   </div>
-  <div class="col-12">
+  <div class="col-md-6">
     <label for="inputAddress" class="form-label">Address</label>
     <input
+    formControlName="address"
       type="text"
       class="form-control"
+      [ngClass]="addressControl?.valid ? 'is-valid' : ''"
       id="inputAddress"
       placeholder="1234 Main St"
     />
   </div>
   <div class="col-md-6">
     <label for="inputCity" class="form-label">City</label>
-    <input type="text" class="form-control" id="inputCity" />
-  </div>
-  <div class="col-md-4">
-    <label for="inputState" class="form-label">State</label>
-    <select id="inputState" class="form-select">
-      <option selected>Choose...</option>
-      <option>...</option>
-    </select>
+    <input 
+    formControlName="city"
+    type="text" 
+    [ngClass]="cityControl?.valid ? 'is-valid' : ''"
+    class="form-control" 
+    id="inputCity" />
   </div>
 
   <div class="col-12">
